@@ -1,12 +1,14 @@
+mport xlrd
+
+#工作薄
+
 wb=xlrd.open_workbook(filename=r"C:\Users\www24\Desktop\2020年每个月的销售情况.xlsx")
 #确定选项卡
-sheet = wb.sheet_by_index(0)
-zongxiaosshoue=0
-for i in range(0,12):
-    sheet = wb.sheet_by_index(i)
-    rows = sheet.nrows
-    for j in range(1,rows):
-        a=sheet.cell_value(j,2)*sheet.cell_value(j,4)
-        zongxiaosshoue=zongxiaosshoue+a
-        print('第%s月，%s日，销售额：%s'%(i+1,j,a))
-print("总销售占比:",zongxiaosshoue)
+sheet = wb.sheet_by_name("1月")
+rows = sheet.nrows
+cols = sheet.ncols
+sum=0
+for i in range(1,rows):
+     data =sheet.row_values(i)
+     sum = sum + data[4]
+print("衣服销售占比：",sum/31)
